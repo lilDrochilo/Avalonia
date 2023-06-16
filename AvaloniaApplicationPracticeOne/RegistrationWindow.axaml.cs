@@ -37,10 +37,10 @@ public partial class RegistrationWindow : Window
         AvaloniaXamlLoader.Load(this);
     }
 
-    // Данный метод срабатыват при нажатии на кнопку Зарегистироваться
+ 
     private void RegBtn_OnClick(object? sender, RoutedEventArgs e)
     {
-        // Проверяем, чтобы все поля были заполнены
+ 
         if (!string.IsNullOrWhiteSpace(loginTBox.Text) &&
             !string.IsNullOrWhiteSpace(passwordTBox.Text) &&
             !string.IsNullOrWhiteSpace(nameTBox.Text) &&
@@ -48,7 +48,7 @@ public partial class RegistrationWindow : Window
             !string.IsNullOrWhiteSpace(phonenumberTBox.Text) &&
             !string.IsNullOrWhiteSpace(birthdateDPicker.SelectedDate.ToString()))
         {
-            // Создадим экземпляр класса User
+ 
             var newUser = new User()
             {
                 Id = Service.GetDbContext().Users.Max(q=>q.Id) + 1,
@@ -60,24 +60,21 @@ public partial class RegistrationWindow : Window
                 Birthdate = birthdateDPicker.SelectedDate.ToString(),
                 IdRole = 1
             };
-            // Добавим нового пользователя
+ 
             Service.GetDbContext().Users.Add(newUser);
-            // Сохраним изменения
+ 
             Service.GetDbContext().SaveChanges();
-            
-            // Вернемся на окно авторизации
+ 
             new MainWindow().Show();
             Close();
         }
     }
-
-    // Данный метод срабатывает при нажатии на кнопку Назад
-    // Вернет пользователя на окно авторизации
+ 
     private void BackBtn_OnClick(object? sender, RoutedEventArgs e)
     {
-        // Открываем окно MainWindow
+ 
         new MainWindow().Show();
-        // Закрываем текущее окно
+ 
         Close();
     }
 }
